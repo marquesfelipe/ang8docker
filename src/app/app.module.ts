@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-//import { LocationStrategy, HashLocationStrategy} from '@angular/common';
+import {HashLocationStrategy, Location, LocationStrategy} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -14,8 +14,8 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule
   ],
-  //providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
-  providers: [],
+  providers: [Location, {provide: LocationStrategy, useClass: HashLocationStrategy}],
+ // providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

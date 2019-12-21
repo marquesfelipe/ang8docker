@@ -16,7 +16,7 @@ RUN npm install -g @angular/cli@7.3.9
 COPY . /app
 
 # generate build
-RUN ng build --output-path=dist  --prod
+RUN ng build --output-path=dist  --deploy-url /teste/ --prod 
 
 ############
 ### prod ###
@@ -25,8 +25,11 @@ RUN ng build --output-path=dist  --prod
 # base image
 FROM nginx:1.16.0-alpine
 
+RUN cd /usr/share/nginx/html/
+RUN mkdir teste
+
 # copy artifact build from the 'build environment'
-COPY --from=build /app/dist /usr/share/nginx/html/
+COPY --from=build /app/dist /usr/share/nginx/html/teste
 
 # expose port 80
 EXPOSE 80
